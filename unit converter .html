@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Unit Converter</title>
+  <style>
+    /* CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 5px;
+    }
+
+    select {
+      width: 100%;
+      padding: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Unit Converter</h2>
+    <label for="inputValue">Value:</label>
+    <input type="number" id="inputValue" placeholder="Enter a value">
+
+    <label for="inputUnit">From:</label>
+    <select id="inputUnit">
+      <option value="cm">Centimeters</option>
+      <option value="in">Inches</option>
+      <option value="m">Meters</option>
+      <option value="ft">Feet</option>
+      <option value="km">Kilometers</option>
+      <option value="mi">Miles</option>
+    </select>
+
+    <label for="outputUnit">To:</label>
+    <select id="outputUnit">
+      <option value="cm">Centimeters</option>
+      <option value="in">Inches</option>
+      <option value="m">Meters</option>
+      <option value="ft">Feet</option>
+      <option value="km">Kilometers</option>
+      <option value="mi">Miles</option>
+    </select>
+
+    <button onclick="convert()">Convert</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    // JavaScript functionality
+    function convert() {
+      var inputValue = parseFloat(document.getElementById('inputValue').value);
+      var inputUnit = document.getElementById('inputUnit').value;
+      var outputUnit = document.getElementById('outputUnit').value;
+      var resultElement = document.getElementById('result');
+
+      if (isNaN(inputValue)) {
+        resultElement.textContent = 'Please enter a valid value';
+        return;
+      }
+
+      var result;
+      if (inputUnit === outputUnit) {
+        result = inputValue;
+      } else if (inputUnit === 'cm') {
+        if (outputUnit === 'in') {
+          result = inputValue / 2.54;
+        } else if (outputUnit === 'm') {
+          result = inputValue / 100;
+        } else if (outputUnit === 'ft') {
+          result = inputValue / 30.48;
+        } else if (outputUnit === 'km') {
+          result = inputValue / 100000;
+        } else if (outputUnit === 'mi') {
+          result = inputValue / 160934.4;
+        }
+      } else if (inputUnit === 'in') {
+        // Add conversion logic for other units as needed
+      }
+
+      resultElement.textContent = result.toFixed(2);
+    }
+  </script>
+</body>
+</html>
